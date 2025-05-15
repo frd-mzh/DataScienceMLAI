@@ -1,46 +1,64 @@
+Predicting College Applications Using Machine Learning
+Overview
+This project focuses on predicting the number of college applications (Apps) received by U.S. colleges using various institutional and academic features. The goal is to help universities anticipate application volumes to optimize planning and resource allocation. The project was developed as part of the Data Science Fundamentals course at Tose’eh Institute.
 
-📊 Predicting College Applications Using Machine Learning
-This project was completed as part of the Data Science Fundamentals course at Tose'eh Institute, under the supervision of Dr. Farzad Minooei. The main objective was to apply the CRISP-DM methodology to a real-world machine learning problem.
+Dataset Description
+The dataset includes information from U.S. colleges in 1995 and contains the following variables:
 
-🧠 Project Overview
-The goal of this project is to predict the number of college applications a university receives (Apps) based on other institutional features. The dataset used includes various attributes from U.S. colleges in the year 1995.
+Apps: Number of applications received (target variable).
 
-🧾 Dataset
-Source: Provided by the course
+Accept: Number of applicants accepted.
 
-File: college.csv
+Enroll: Number of new students enrolled.
 
-Target Variable: Apps — Number of applications received
+Top10perc: % of new students from the top 10% of their high school class.
 
-Features: Include variables like acceptance rate, student-to-faculty ratio, tuition, SAT scores, etc.
+Top25perc: % of new students from the top 25% of their high school class.
 
-Description File: college_data_description.txt (not included here, but referenced in the project)
+F.Undergrad: Number of full-time undergraduates.
 
-📌 Problem Motivation
-Why? Predicting application volume can help colleges optimize recruitment strategies, allocate resources, and plan more effectively.
+P.Undergrad: Number of part-time undergraduates.
 
-Use Cases: Useful for university admissions offices, policymakers, and educational researchers.
+Outstate: Out-of-state tuition.
 
-🛠️ Methodology
-This project follows the CRISP-DM framework, including:
+Room.Board: Room and board cost.
 
-1. Business Understanding
-Understand the problem domain and why predicting Apps is valuable.
+Books: Estimated book cost.
 
-2. Data Understanding
-Analyze the dataset structure
+Personal: Estimated personal spending.
 
-Check for missing values, variable types, and potential anomalies
+PhD: % of faculty with PhDs.
 
-3. Data Preparation
-Cleaning and preprocessing
+Terminal: % of faculty with terminal degrees.
 
-Feature engineering
+S.F.Ratio: Student/faculty ratio.
 
-Normalization and transformation
+perc.alumni: % of alumni who donate.
 
-4. Modeling
-Implemented multiple machine learning models in Python:
+Expend: Instructional expenditure per student.
+
+Grad.Rate: Graduation rate.
+
+Methodology
+Data Preprocessing:
+
+Handled missing values and outliers.
+
+Converted categorical variables.
+
+Normalized numerical features where appropriate.
+
+Exploratory Data Analysis (EDA):
+
+Visualized distributions and outliers using boxplots and histograms.
+
+Analyzed correlations using a heatmap.
+
+Investigated relationships between Apps and predictor variables.
+
+Modeling and Prediction:
+
+Tested multiple regression models to predict the Apps variable:
 
 Linear Regression
 
@@ -50,40 +68,79 @@ Random Forest Regressor
 
 Gradient Boosting Regressor
 
-Evaluated models using RMSE, MAE, and R²
+Performed hyperparameter tuning and cross-validation.
 
-5. Evaluation
-Compared model performance
+Evaluated model performance using:
 
-Discussed trade-offs
+RMSE (Root Mean Squared Error)
 
-Selected the best model based on test-set accuracy
+MAE (Mean Absolute Error)
 
-6. Deployment (Optional)
-Discussed potential deployment via web application or API
+R² Score
 
-📈 Results
-Best-performing model: (add model name and brief performance summary here once available)
+Key Findings
+Strong Predictors: Features such as Outstate, PhD, F.Undergrad, and perc.alumni showed high correlation with Apps.
 
-Key finding: Certain features like acceptance rate, SAT scores, and out-of-state tuition were strong predictors of application volume.
+Non-Linear Models Performed Better: Tree-based models, especially Random Forest, yielded better predictive performance than linear models.
 
-💡 Lessons Learned
-Hands-on experience with machine learning pipelines
+Data Quality Matters: Addressing outliers and normalizing skewed variables improved model accuracy significantly.
 
-Practical application of CRISP-DM
+Regression Models
+Linear Regression:
 
-Importance of feature engineering and model evaluation
+Simple and interpretable.
 
-📂 Files
-notebook.ipynb — Main Jupyter Notebook with all code and visualizations
+Moderate accuracy with some underfitting.
 
-college.csv — Dataset
+Random Forest Regressor:
 
-README.md — Project documentation (this file)
+Best performing model with the lowest RMSE and highest R².
 
-📚 Tools & Technologies
-Python
+Captured non-linear relationships effectively.
 
-Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn
+Gradient Boosting Regressor:
 
-Jupyter Notebook
+Performed well, but slightly overfit the training data.
+
+Conclusion
+Predicting college application volumes is feasible using machine learning and institutional features. Universities can leverage such models to enhance strategic planning in admissions and marketing. Ensemble models like Random Forest provide robust predictions due to their ability to model complex relationships in the data.
+
+Repository Structure
+notebook.ipynb: Jupyter Notebook containing the complete analysis and models.
+
+college.csv: Dataset used in the analysis.
+
+README.md: Overview and documentation of the project (this file).
+
+How to Use
+Clone the repository:
+
+bash
+Copy
+Edit
+git clone https://github.com/your-username/college-applications-prediction.git
+Open notebook.ipynb in Jupyter Notebook or VS Code.
+
+Run the cells to explore data analysis and model predictions.
+
+Dependencies
+Python 3.x
+
+Libraries:
+
+pandas
+
+numpy
+
+scikit-learn
+
+matplotlib
+
+seaborn
+
+Author
+Farid Mohammadzadeh
+
+Supervisor: Dr. Farzad Minooei
+
+For any questions or feedback, feel free to contact Farid Mohammadzadeh.
