@@ -39,7 +39,6 @@ I developed a **supervised machine learning pipeline** to predict the number of 
   - Private institutions receive significantly more applications
   - Out-of-state tuition shows moderate positive correlation (r=0.57)
 
-![Feature Distributions](https://via.placeholder.com/600x400?text=Feature+Distributions)
 *Histograms of key numeric features*
 ![image](https://github.com/user-attachments/assets/d53d82b0-1f3e-48fa-8340-0eaa71757194)
 
@@ -80,8 +79,6 @@ Key metrics used:
 | DNN - Scaled - Selected Features (2) | 316.19   | 8.53     | 172.23   |
 | DNN - Scaled - Selected Features (3) | 460.54   | 12.19    | 255.88   |
 | EGB - Pca                     | 678.65   | 5.31     | 224.50   |
-
-*Note: Three configurations of "DNN - Scaled - Selected Features" were tested*
 
 ### Key Findings
 1. **RNN with scaled features** emerged as the top performer with:
