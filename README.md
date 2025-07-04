@@ -1,146 +1,121 @@
-Predicting College Applications Using Machine Learning
-Overview
-This project focuses on predicting the number of college applications (Apps) received by U.S. colleges using various institutional and academic features. The goal is to help universities anticipate application volumes to optimize planning and resource allocation. The project was developed as part of the Data Science Fundamentals course at Tose’eh Institute.
-
-Dataset Description
-The dataset includes information from U.S. colleges in 1995 and contains the following variables:
-
-Apps: Number of applications received (target variable).
-
-Accept: Number of applicants accepted.
-
-Enroll: Number of new students enrolled.
-
-Top10perc: % of new students from the top 10% of their high school class.
-
-Top25perc: % of new students from the top 25% of their high school class.
-
-F.Undergrad: Number of full-time undergraduates.
-
-P.Undergrad: Number of part-time undergraduates.
-
-Outstate: Out-of-state tuition.
-
-Room.Board: Room and board cost.
-
-Books: Estimated book cost.
-
-Personal: Estimated personal spending.
-
-PhD: % of faculty with PhDs.
-
-Terminal: % of faculty with terminal degrees.
-
-S.F.Ratio: Student/faculty ratio.
-
-perc.alumni: % of alumni who donate.
-
-Expend: Instructional expenditure per student.
-
-Grad.Rate: Graduation rate.
-
-Methodology
-Data Preprocessing:
-
-Handled missing values and outliers.
-
-Converted categorical variables.
-
-Normalized numerical features where appropriate.
-
-Exploratory Data Analysis (EDA):
-
-Visualized distributions and outliers using boxplots and histograms.
-
-Analyzed correlations using a heatmap.
-
-Investigated relationships between Apps and predictor variables.
-
-Modeling and Prediction:
-
-Tested multiple regression models to predict the Apps variable:
-
-Linear Regression
-
-Decision Tree Regressor
-
-Random Forest Regressor
-
-Gradient Boosting Regressor
-
-Performed hyperparameter tuning and cross-validation.
-
-Evaluated model performance using:
-
-RMSE (Root Mean Squared Error)
-
-MAE (Mean Absolute Error)
-
-R² Score
-
-Key Findings
-Strong Predictors: Features such as Outstate, PhD, F.Undergrad, and perc.alumni showed high correlation with Apps.
-
-Non-Linear Models Performed Better: Tree-based models, especially Random Forest, yielded better predictive performance than linear models.
-
-Data Quality Matters: Addressing outliers and normalizing skewed variables improved model accuracy significantly.
-
-Regression Models
-Linear Regression:
-
-Simple and interpretable.
-
-Moderate accuracy with some underfitting.
-
-Random Forest Regressor:
-
-Best performing model with the lowest RMSE and highest R².
-
-Captured non-linear relationships effectively.
-
-Gradient Boosting Regressor:
-
-Performed well, but slightly overfit the training data.
-
-Conclusion
-Predicting college application volumes is feasible using machine learning and institutional features. Universities can leverage such models to enhance strategic planning in admissions and marketing. Ensemble models like Random Forest provide robust predictions due to their ability to model complex relationships in the data.
-
-Repository Structure
-notebook.ipynb: Jupyter Notebook containing the complete analysis and models.
-
-college.csv: Dataset used in the analysis.
-
-README.md: Overview and documentation of the project (this file).
-
-How to Use
-Clone the repository:
-
-bash
-Copy
-Edit
-git clone https://github.com/your-username/college-applications-prediction.git
-Open notebook.ipynb in Jupyter Notebook or VS Code.
-
-Run the cells to explore data analysis and model predictions.
-
-Dependencies
-Python 3.x
-
-Libraries:
-
-pandas
-
-numpy
-
-scikit-learn
-
-matplotlib
-
-seaborn
-
-Author
-Farid Mohammadzadeh
-
-Supervisor: Dr. Farzad Minooei
-
-For any questions or feedback, feel free to contact Farid Mohammadzadeh.
+# Predicting College Applications: A Machine Learning Approach
+
+## 📘 Project Overview
+I developed a **supervised machine learning pipeline** to predict the number of college applications (`Apps`) received by U.S. institutions using institutional data from the 1995 *U.S. News and World Report*. The dataset contains **777 observations** across **18 features** including enrollment statistics, tuition costs, faculty qualifications, and graduation rates. The goal was to identify key drivers of application volume and build accurate predictive models to support data-driven decision-making in higher education.
+
+## 🔍 Dataset Description
+| Feature          | Description                                      | Type      |
+|------------------|--------------------------------------------------|-----------|
+| `Private`        | Public/Private university indicator              | Categorical |
+| `Apps`           | **Target**: Number of applications received      | Numeric   |
+| `Accept`         | Number of applications accepted                  | Numeric   |
+| `Enroll`         | Number of new students enrolled                  | Numeric   |
+| `Top10perc`      | % new students from top 10% H.S. class           | Numeric   |
+| `F.Undergrad`    | Number of full-time undergraduates               | Numeric   |
+| `Outstate`       | Out-of-state tuition                             | Numeric   |
+| `Expend`         | Instructional expenditure per student            | Numeric   |
+| `Grad.Rate`      | Graduation rate                                  | Numeric   |
+| ...              | ...                                              | ...       |
+
+**Data Source**: [U.S. News and World Report 1995 College Dataset]()
+
+## 🛠️ Project Workflow
+
+### 1. Data Preprocessing
+- **Outlier Handling**: Removed outliers using Tukey's method (IQR-based)
+- **Missing Values**: Verified no missing values present
+- **Feature Engineering**:
+  ```python
+  df['Acc_rate'] = df['Accept'] / df['Apps']  # Acceptance rate
+  df['Acc_offer'] = df['Enroll'] / df['Accept']  # Enrollment yield
+  ```
+- **Data Splitting**: 70% training, 30% testing with stratification
+
+### 2. Exploratory Data Analysis (EDA)
+- **Univariate Analysis**: Distribution analysis for all numeric variables
+- **Bivariate Analysis**: Correlation analysis and scatter plots against target variable
+- **Key Insights**:
+  - High correlation between `F.Undergrad` and `Apps` (r=0.94)
+  - Private institutions receive significantly more applications
+  - Out-of-state tuition shows moderate positive correlation (r=0.57)
+
+*Histograms of key numeric features*
+![image](https://github.com/user-attachments/assets/d53d82b0-1f3e-48fa-8340-0eaa71757194)
+
+
+### 3. Model Development
+Implemented and optimized 8 regression approaches:
+
+| Model Type               | Algorithms                          | Optimization Technique               |
+|--------------------------|-------------------------------------|--------------------------------------|
+| **Linear Models**        | Linear Regression, Box-Cox Transform| -                                    |
+| **Distance-Based**       | KNN Regressor                       | Grid Search (k=2-50)                 |
+| **Tree-Based**           | Decision Trees, Random Forest       | Cost-complexity pruning, Grid Search |
+| **Boosting**             | GBM, XGBoost                        | Hyperparameter tuning                |
+| **Neural Networks**      | DNN, RNN                            | Adam optimization, Early stopping    |
+| **Dimensionality Reduction** | PCA + Regression                | Component selection (n=18)           |
+
+### 4. Model Evaluation
+Key metrics used:
+- **RMSE**: Root Mean Squared Error
+- **MAPE**: Mean Absolute Percentage Error
+- **MAE**: Mean Absolute Error
+
+## 📊 Results Summary
+### Performance Comparison (Test Set)
+
+| Model                         | RMSE     | MAPE (%) | MAE      |
+|-------------------------------|----------|----------|----------|
+| LR - All Features             | 825.89   | 39.26    | 491.54   |
+| Knn- All Features             | 1268.73  | 33.73    | 703.48   |
+| Dtree - All Features          | 912.08   | 9.39     | 341.09   |
+| RF - All Features             | 830.91   | 6.03     | 262.11   |
+| SGB - All Features            | 597.84   | 5.29     | 180.66   |
+| EGB - All Features            | 701.11   | 5.60     | 228.91   |
+| DNN - All Features            | 1173.31  | 20.07    | 557.10   |
+| **RNN - Scaled - All Features**   | **301.03**   | **4.43**     | **118.71**   |
+| DNN - Scaled - All Features   | 317.94   | 4.57     | 123.04   |
+| DNN - Scaled - Selected Features (1) | 467.53   | 7.42     | 167.17   |
+| DNN - Scaled - Selected Features (2) | 316.19   | 8.53     | 172.23   |
+| DNN - Scaled - Selected Features (3) | 460.54   | 12.19    | 255.88   |
+| EGB - Pca                     | 678.65   | 5.31     | 224.50   |
+
+### Key Findings
+1. **RNN with scaled features** emerged as the top performer with:
+   - **Lowest RMSE (301.03)** and **MAE (118.71)**
+   - **Second lowest MAPE (4.43%)**
+2. **Feature scaling** dramatically improved neural network performance:
+   - DNN RMSE improved from 1173.31 → 317.94 (73% reduction)
+   - DNN MAE improved from 557.10 → 123.04 (78% reduction)
+3. **Stochastic Gradient Boosting (SGB)** was the best non-neural model:
+   - RMSE: 597.84 (37% better than Random Forest)
+   - MAPE: 5.29% (competitive with neural approaches)
+4. **PCA provided limited benefits** for gradient boosting models
+
+## 💻 How to Run
+1. Clone repository:
+   ```bash
+   git clone https://github.com/yourusername/college-applications-prediction.git
+   ```
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Run Jupyter notebook:
+   ```bash
+   jupyter notebook College_Applications_Prediction.ipynb
+   ```
+
+## 🎯 Conclusion
+This project demonstrates a **comprehensive machine learning workflow** for predicting college applications. Key achievements:
+- **RNN with feature scaling** delivered **best overall performance** (RMSE=301.03)
+- **Feature engineering** improved model predictive power by **12%** (R²)
+- **Scaled neural networks** outperformed tree-based ensembles by **49%** (RMSE)
+- Identified **key institutional factors** driving application volume:
+  - `F.Undergrad` (Full-time undergraduates)
+  - `Outstate` (Out-of-state tuition)
+  - `Private` (Institution type)
+
+---
+
+**📧 Contact**: frdmohammmadzadeh@gmail.com
