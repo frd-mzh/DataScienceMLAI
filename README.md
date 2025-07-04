@@ -104,7 +104,19 @@ Key metrics used:
 3. Run Jupyter notebook:
    ```bash
    jupyter notebook College_Applications_Prediction.ipynb
+   
    ```
+
+## 🌐 Web Application
+An interactive dashboard was developed using Dash (Plotly) to visualize predictions and explore the impact of different regression models and hyperparameters on performance. The app enables users to:
+
+Select among KNN, Linear Regression, Decision Trees, Random Forest, Gradient Boosting, DNN, and RNN
+
+Adjust model-specific hyperparameters in real-time
+
+Visualize actual vs. predicted application numbers based on selected features
+
+Track key regression metrics such as RMSE, MAPE, and MAE
 
 ## 🎯 Conclusion
 This project demonstrates a **comprehensive machine learning workflow** for predicting college applications. Key achievements:
